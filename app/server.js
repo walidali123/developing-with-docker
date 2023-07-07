@@ -38,10 +38,10 @@ let databaseName = "my-db";
 app.post('/update-profile', function (req, res) {
   let userObj = req.body;
 
-  MongoClient.connect(mongoUrlLocal, mongoClientOptions, function (err, client) {
+  MongoClient.connect('mongodb://admin:password@mongodb', function (err, client) {
     if (err) throw err;
 
-    let db = client.db(databaseName);
+    let db = client.db('user-account');
     userObj['userid'] = 1;
 
     let myquery = { userid: 1 };
@@ -60,10 +60,10 @@ app.post('/update-profile', function (req, res) {
 app.get('/get-profile', function (req, res) {
   let response = {};
   // Connect to the db
-  MongoClient.connect(mongoUrlLocal, mongoClientOptions, function (err, client) {
+  MongoClient.connect('mongodb://admin:password@mongodb:27017', function (err, client) {
     if (err) throw err;
 
-    let db = client.db(databaseName);
+    let db = client.db('user-account');
 
     let myquery = { userid: 1 };
 
